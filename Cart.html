@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trend Aura - Shopping Bag</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #111111;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .back-nav {
+    padding: 15px 20px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .back-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cart-container {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+  }
+
+  /* Cart Item Card Structure */
+  .cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+    align-items: center;
+  }
+
+  .cart-img-box {
+    width: 80px;
+    height: 90px;
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+
+  .cart-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .cart-details {
+    flex-grow: 1;
+  }
+
+  .item-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+  }
+
+  .item-meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .item-price {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  /* Pricing Summary Section */
+  .summary-box {
+    margin-top: 30px;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 6px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #444;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: bold;
+    color: #111;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #cccccc;
+  }
+
+  /* Premium Buttons */
+  .checkout-btn {
+    width: 100%;
+    padding: 16px 0;
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background-color 0.2s;
+  }
+
+  .checkout-btn:hover {
+    background-color: orange;
+    color: #111111;
+  }
+</style>
+</head>
+<body>
+
+  <header class="header-container">
+    <div style="font-weight: bold; font-size: 18px; letter-spacing: 1px;">TREND AURA</div>
+  </header>
+
+  <div class="back-nav">
+    <a href="homepage.html" class="back-link">← Continue Shopping</a>
+  </div>
+
+  <main class="cart-container">
+    <h2>Your Shopping Bag</h2>
+
+    <div id="cart-list">
+      </div>
+
+    <div class="summary-box">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotal-val">₹0</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery Fee</span>
+        <span style="color: green; font-weight: 500;">FREE</span>
+      </div>
+      <div class="total-row">
+        <span>Total Amount</span>
+        <span id="total-val">₹0</span>
+      </div>
+    </div>
+
+    <button class="checkout-btn" onclick="placeOrder()">Proceed to Checkout</button>
+  </main>
+
+  <script>
+    // 1. Check URL query tags (e.g. ?buy=gk) to see what item is coming in
+    const urlParams = new URLSearchParams(window.location.search);
+let buyId = urlParams.get('buy');
+
+// Convert to lowercase to make it bulletproof against typos!
+if (buyId) {
+    buyId = buyId.toLowerCase().trim();
+}
+// 1. Cleaned Inventory List (Lines 192 - 206)
+const inventory = {
+  gk: { name: "GK COTTON'S", price: 430, image: "white_maxi.png" },
+  frocking: { name: "FROCKING", price: 730, image: "yfrock.png" },
+  shiny: { name: "SHINY SHIRT", price: 890, image: "shirt.png" },
+  perfect: { name: "PERFECT_FIT", price: 430, image: "sleeveless maxi.png" },
+  suit: { name: "SUITOPHIA", price: 830, image: "suit.png" },
+  jean: { name: "JEANIBLE", price: 630, image: "Jean.jpg" },
+  kuwait: { name: "KUWAIT KURTIS", price: 830, image: "kurti1.png" }, 
+  pinktastic: { name: "PINKTASTIC", price: 630, image: "pinkfrock.png" },
+  pink: { name: "PINK PEARL", price: 830, image: "kurti2.png" },
+  comfort: { name: "COMFORT_COLLECTION", price: 630, image: "boy_kid.png" }
+};
+const cartList = document.getElementById('cart-list');
+    let itemPrice = 0;
+
+// 2. Fixed Image Block Layout String (Lines 215 - 220)
+if (buyId && inventory[buyId]) {
+  const item = inventory[buyId];
+  itemPrice = item.price;
+
+  cartList.innerHTML = `
+    <div class="cart-item">
+      <div class="cart-img-box">
+        <img class="cart-img" src="${item.image}" alt="${item.name}">
+      </div>
+      <div class="cart-details">
+        <h4 class="item-name">${item.name}</h4>
+        <div class="item-meta">Size: M | Qty: 1</div>
+        <div class="item-price">₹${item.price}</div>
+      </div>
+    </div>
+  `;
+}
+    else {
+      // Empty state handler if someone loads the cart with no items selected
+      cartList.innerHTML = `<p style="color:#777; font-size:14px;">Your luxury bag is currently empty.</p>`;
+    }
+
+    // 4. Set the text for calculated total summaries
+    document.getElementById('subtotal-val').innerText = "₹" + itemPrice;
+    document.getElementById('total-val').innerText = "₹" + itemPrice;
+
+    function placeOrder() {
+      if (itemPrice > 0) {
+        alert("✨ Thank you for shopping with Trend Aura! Your luxury order has been placed successfully.");
+        window.location.href = "homepage.html";
+      } else {
+        alert("Please add an item to your bag before checking out.");
+      }
+    }
+  </script>
+</body>
+</html>

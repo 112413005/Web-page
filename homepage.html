@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trend Aura - Luxury Apparel</title>
+<style>
+  /* Global Luxury Styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #111111;
+  }
+
+  /* 1. Header & Logo Update */
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+  }
+
+  .logo-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; /* Makes your square logo image perfectly circular */
+    object-fit: cover;
+    border: 1px solid #d4af37; /* Subtle gold ring around it */
+  }
+
+  .search-form {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 25px 0 0 25px; /* Elegant rounded look */
+    font-size: 14px;
+    outline: none;
+  }
+
+  .search-button {
+    padding: 10px 20px;
+    background-color: #111111;
+    color: #d4af37; /* Gold text */
+    font-weight: 600;
+    border: 1px solid #111111;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+  }
+
+  /* 2. Navigation Bar Update */
+  .nav-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #fafafa;
+  }
+
+  .nav-link {
+    color: #111111;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase; /* Classic luxury look */
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #d4af37; /* Turns gold on hover */
+  }
+
+  /* 3. Two-Column Product Grid */
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .product-card {
+    width: 50%; /* Perfect 2-column split like your screenshot */
+    box-sizing: border-box;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Thin border between columns */
+  .product-card:nth-child(odd) {
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .product-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
+
+  .product-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .price-container {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .current-price {
+    font-weight: bold;
+    color: #111;
+  }
+
+  .old-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 5px;
+    font-size: 12px;
+  }
+
+  /* 4. Elegant Buy Button */
+  .buy-button {
+    width: 80%;
+    padding: 8px 0;
+    background-color: #111111; /* Sleek black instead of orange */
+    color: #ffffff;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .buy-button:hover {
+    background-color: #d4af37; /* Swaps to gold on hover */
+    color: #111111;
+  }
+</style>
+</head>
+<body>
+
+  <header class="header-container">
+    <img class="logo-image" src="logo2.png" alt="Trend Aura">
+    <form class="search-form">
+      <input type="text" id="search-input" placeholder="Search for products...">
+      <button type="submit" class="search-button"onclick="filterProducts()">Search</button>
+    </form>
+  </header>
+
+  <nav class="nav-bar">
+    <a href="#" class="nav-link">Home</a>
+    <a href="#" class="nav-link">Men</a>
+    <a href="#" class="nav-link">Women</a>
+    <a href="#" class="nav-link">Kids</a>
+    <a href="#" class="nav-link">Contact</a>
+  </nav>
+<table>
+  <tr>
+<div class="product-details">
+      <td>  <img class="product-image" src="white_maxi.png" width="480" height="380""><br>
+        GK COTTON'S <div class="price-container">
+       <span> <b>₹430</b> </span>
+       <span><del>₹550</del></span><br>
+        <i>37% offer</i></div>
+        <a href="product.html?id=gk" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+        </td>
+</div>
+
+<div class="product-details">
+        <td>
+        <img class="product-image" src="yfrock.png" width="380" height="370"><br>
+      FROCKING
+        <div class="price-container">  
+        <b>₹730</b> <del>₹1000</del><br>
+        <i>37% offer</i>
+        </div><a href="product.html?id=frocking" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+        </td>
+</div>
+</tr>
+  <tr>
+<div class="product-details">
+         <td> <img class="product-image" src="shirt.png" width="380" height="370" alt="Kurti"><br>
+        SHINY SHIRT
+        <div class="price-container">
+        <b>₹890</b> <del>₹990</del><br><i>37% offer</i>
+        </div>
+      <a href="product.html?id=shiny" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+</div>
+
+<div class="product-details">
+          <td>
+          <img class="product-image" src="sleeveless maxi.png" width="380" height="370"><br>
+        PERFECT_FIT 
+        <div class="price-container"> 
+        <b>₹430</b>  <del>₹550</del><br>
+        <i>37% offer</i>
+        </div>
+<a href="product.html?id=perfect" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+</div>
+  </tr>
+    <tr>
+  <div class="product-details">
+         <td> <img class="product-image" src="kurti2.png" width="380" height="370"><br>
+        PINK PEARL  
+        <div class="price-container">
+          <span><b>₹830</b></span> 
+          <span><del>₹980</del></span>
+        <i>37% offer</i>
+        </div>
+<a href="product.html?id=pink" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+        </div>
+<div class="product-details">
+          <td><img class="product-image" src="boy_kid.png" width="380" height="370"><br>
+        COMFORT_COLLECTION
+        <div class="price-container"><b>₹630</b>  <del>₹750</del><br>
+        <i>37% offer</i>
+        </div>
+<a href="product.html?id=comfort" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+    </div>
+      </tr>
+        <tr>
+<div class="product-details">
+       <td>   <img class="product-image" src="suit.png" width="380" height="370"><br>
+        SUITOPHIA
+        <div class="price-container"><b>₹830</b> <del>₹980</del><br>
+        <i>37% offer</i></div>
+      <a href="product.html?id=suit" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+</div>
+        <div class="product-details">
+      <td>    <img class="product-image" src="Jean.jpg" width="380" height="370"><br>
+        JEANIBLE 
+        <div class="price-container"><b>₹630</b>  <del>₹750</del><br>
+        <i>37% offer</i>
+        </div>
+       <a href="product.html?id=jean" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+        </div>
+  </tr>
+ <tr>
+        <div class="product-details">
+        <td>  <img class="product-image" src="kurti1.png" width="380" height="380"><br>
+        KUWAIT KURTIS
+        <div class="price-container"><b>₹830</b> <del>₹980</del><br>
+        <i>37% offer</i>
+        </div>
+<a href="product.html?id=kuwait" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+
+          </td>
+        </div>
+        <div class="product-details">
+         <td> <img class="product-image" src="pinkfrock.png" width="380" height="370"><br>
+        PINKTASTIC
+        <div class="price-container"><b>₹630</b> <del>₹750</del><br>
+        <i>37% offer</i>
+        </div>
+<a href="product.html?id=pinktastic" class="buy" style="background-color: orange; text-decoration: none; display: inline-block; text-align: center;">Buy Now</a>
+          </td>
+</div>
+  </tr>
+</table>
+<script>
+  function filterProducts() {
+    let input = document.getElementById('search-input').value.toUpperCase();
+    let cards = document.querySelectorAll('.product-details');
+
+    cards.forEach(card => {
+      card.style.display = card.innerText.toUpperCase().includes(input) ? "" : "none";
+    });
+  }
+</script>
+</body>
+</html>

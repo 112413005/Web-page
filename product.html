@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trend Aura - Premium Details</title>
+<style>
+  /* Global Luxury Styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #111111;
+  }
+
+  /* Fixed Luxury Header */
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  /* Back Button Navigation */
+  .back-nav {
+    padding: 15px 20px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .back-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Detail Layout Wrapper */
+  .detail-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  /* Product Showcase Frame */
+  .main-image-box {
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    margin-bottom: 25px;
+    background-color: #fafafa;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+
+  .main-image {
+    max-width: 100%;
+    height: 320px;
+    object-fit: contain;
+  }
+
+  /* Description & Title Layout */
+  .info-box {
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+  }
+
+  .brand-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #d4af37; /* Royal Gold Tag */
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  /* Product Dynamic Placeholders */
+  .item-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: #111;
+  }
+
+  .detail-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 25px;
+  }
+
+  .detail-old-price {
+    font-size: 16px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-weight: normal;
+  }
+
+  /* Sizing Selector Design */
+  .selector-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  .size-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .size-btn {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #cccccc;
+    background: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+
+  /* Matches your custom homepage orange/black style accents */
+  .size-btn:hover, .size-btn.active {
+    border-color: #111111;
+    background-color: orange; /* Swaps to premium orange accent */
+    color: #111111;
+  }
+
+  .description {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  /* Dynamic Add to Bag Button */
+  .action-btn {
+    width: 100%;
+    padding: 16px 0;
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .action-btn:hover {
+    background-color: orange;
+    color: #111111;
+  }
+</style>
+</head>
+<body>
+
+  <header class="header-container">
+    <div style="font-weight: bold; font-size: 18px; letter-spacing: 1px;">TREND AURA</div>
+  </header>
+
+  <div class="back-nav">
+    <a href="homepage.html" class="back-link">← Return to Collection</a>
+  </div>
+
+  <main class="detail-container">
+    
+    <div class="main-image-box">
+      <img id="product-img" class="main-image" src="" alt="Product View">
+    </div>
+
+    <div class="info-box">
+      <div class="brand-tag">Luxury Collection</div>
+      <h1 id="product-name" class="item-title">Loading...</h1>
+      
+      <div class="detail-price">
+        <span id="product-price">₹0</span>
+        <span id="product-old-price" class="detail-old-price">₹0</span>
+      </div>
+
+      <div class="selector-title">Select Size</div>
+      <div class="size-options">
+        <button class="size-btn" onclick="selectSize(this)">S</button>
+        <button class="size-btn active" onclick="selectSize(this)">M</button>
+        <button class="size-btn" onclick="selectSize(this)">L</button>
+        <button class="size-btn" onclick="selectSize(this)">XL</button>
+      </div>
+
+      <div class="selector-title">Product Details</div>
+      <p id="product-desc" class="description">Loading details...</p>
+
+      <button class="action-btn" onclick="addToCart()">Add to Bag</button>
+    </div>
+
+  </main>
+
+  <script>
+    // 1. Grab the current ID parameters out of the URL string
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    // 2. Centralized Master List of Your Inventory Data
+    const products = {
+      gk: {
+        name: "GK COTTON'S",
+        price: "430",
+        old: "550",
+        image: "white_maxi.png",
+        desc: "Beautiful custom floral printed white maxi tier dress crafted out of premium breathable cotton fabric. Perfectly captures royal summer luxury accents."
+      },
+     frocking : {
+        name: "FROCKING",
+        price: "730",
+        old: "1000",
+        image: "yfrock.png",
+        desc: "Stunning yellow floral cotton frock highlighting detailed waist bows and soft-ruffled lining profiles built specifically for style longevity."
+      },
+      shiny: {
+        name: "SHINY SHIRT",
+        price: "890",
+        old: "990",
+        image: "shirt.png",
+        desc: "Sharp long-sleeved sky blue structured dress shirt offering custom tail-end adjustments and breathable cotton thread construction."
+      },
+      perfect: {
+    name: "PERFECT_FIT",
+    price: "430",
+    old: "550",
+    image: "sleeveless maxi.png", // Uses the sleeveless version of your maxi dress
+    desc: "Elegant sleeveless floral summer maxi dress featuring a high-waisted square neck design. Tailored to offer an effortless silhouette and maximum breathable comfort."
+  },
+  pink: {
+    name: "PINK PEARL",
+    price: "830",
+    old: "980",
+    image: "kurti2.png", // Replace with your actual filename for the pink ensemble
+    desc: "An elegant, embroidered premium pastel pink traditional suit set. Includes matching dupatta with intricate lace borders, offering a sophisticated and graceful aesthetic."
+  },
+  comfort: {
+    name: "COMFORT_COLLECTION",
+    price: "630",
+    old: "750",
+    image: "boy_kid.png", // Replace with your actual filename for the kids outfit
+    desc: "Adorable baby boy party outfit featuring a short-sleeved sky blue button-down shirt with a matching dark navy bow tie, structured suspenders, and comfortable casual shorts."
+  },
+  suit: {
+    name: "ROYAL NAVY SUIT",
+    price: "2490", // Example placeholder price for the luxury suit at the bottom
+    old: "3500",
+    image: "suit.png", // Replace with your actual filename for the suit
+    desc: "A crisply tailored, slim-fit luxury navy blue formal suit. Perfectly structured shoulders and a refined white pocket square detail make it prime for high-end occasions."
+  },
+  jean: {
+    name: "CLASSIC BLUE DENIM",
+    price: "790", // Example placeholder price for the blue trousers
+    old: "1200",
+    image: "Jean.jpg", // Replace with your actual filename for the pants
+    desc: "Timeless mid-wash straight-leg blue denim jeans. Built from heavy-duty yet breathable cotton blends, offering a perfect casual staple for daily wear."
+  },
+  kuwait: {
+    name: "KUWAIT KURTIS",
+    price: "830",
+    old: "980",
+    image: "kurti1.png", // Verify your actual filename
+    desc: "Breathtaking premium sage-mint traditional suit set featuring fine luxury ivory embroidery details. Paired with a matching sheer drape dupatta for timeless elegance."
+  },
+  pinktastic: {
+    name: "PINKTASTIC",
+    price: "630",
+    old: "750",
+    image: "pinkfrock.png", // Verify your actual filename
+    desc: "An enchanting tiered blush pink tulle princess dress with delicate flutter sleeves and a gorgeous structured waist bow satin ribbon accent."
+  }
+  
+      
+    };
+
+    // 3. Fallback safely to "gk" if no valid ID or unmatched link parameter is found
+    const currentItem = products[productId] || products['gk'];
+
+    // 4. Update the placeholder nodes on the interface instantly
+    document.getElementById('product-name').innerText = currentItem.name;
+    document.getElementById('product-price').innerText = "₹" + currentItem.price;
+    document.getElementById('product-old-price').innerText = "₹" + currentItem.old;
+    document.getElementById('product-img').src = currentItem.image;
+    document.getElementById('product-img').alt = currentItem.name;
+    document.getElementById('product-desc').innerText = currentItem.desc;
+
+      function addToCart() {
+  // Automatically routes to cart passing the current active product ID
+  window.location.href = "Cart.html?buy=" + productId;
+}
+  </script>
+</body>
+</html>
