@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>astrology</title>
+  </head>
+  <body>
+    <h1>astrosite</h1>
+    <form action="welcome.php" method="post">
+      <table>
+        <tr>
+          <td>
+            <label for="user-name">Name:</label>
+          </td>
+          <td><input type="text" name="name" maxlength="11"><br></td>
+        </tr>
+        <tr>
+          <td><label for="user-dob">dob:</label></td>
+          <td><input type="datetime-local" name="dob"></td>
+        </tr>
+        <tr>
+          <td><label for="user-curious">field_to_know:</label></td>
+          <td><input type="text" name="about" list="life-choice"></td>
+          <td>
+            <datalist id="life-choice">
+            <option value="general life"></option>
+            <option value="self growth"></option>
+            <option value="solutions"></option>
+            <option value="relationships"></option>
+            </datalist><br>
+          </td>
+        </tr>
+     <tr>
+       <td><input type="submit"></td>
+     </tr>
+      </table>
+    </form>
+  </body>
+</html>
