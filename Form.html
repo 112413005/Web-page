@@ -15,32 +15,31 @@
           <td>
             <label for="user-name">Name:</label>
           </td>
-          <td><input type="text" name="name" maxlength="11"><br></td>
+          <td><input type="text" id="user-name" name="name" maxlength="11"></td>
         </tr>
         <tr>
           <td><label for="user-dob">dob:</label></td>
-          <td><input type="datetime-local" name="dob"></td>
+          <td><input type="datetime-local" id="user-dob" name="dob"></td>
         </tr>
         <tr>
           <td><label for="user-curious">field_to_know:</label></td>
-          <td><input type="text" name="about" list="life-choice"></td>
           <td>
+            <input type="text" id="user-curious" name="about" list="life-choice">
             <datalist id="life-choice">
-            <option value="general life"></option>
-            <option value="self growth"></option>
-            <option value="solutions"></option>
-            <option value="relationships"></option>
-            </datalist><br>
+              <option value="general life"></option>
+              <option value="self growth"></option>
+              <option value="solutions"></option>
+              <option value="relationships"></option>
+            </datalist>
           </td>
         </tr>
-     <tr>
-       <td colspan="0">
-       <td><input type="submit"></td>
-       </td>
-     </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="Submit"></td>
+        </tr>
       </table>
-        </fieldset>
+      </fieldset>
     </form>
-      </center>
+    </center>
   </body>
 </html>
