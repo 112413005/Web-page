@@ -8,15 +8,15 @@
     <h1>Astrosite Results</h1>
     
     <?php
-    // 1. Grab the mail from the form
-    $userName  = $_POST['name'];
-    $userDob   = $_POST['dob'];
-    $userAbout = $_POST['about'];
+    // 1. Grab the form data safely using $_POST
+    $userName  = isset($_POST['name']) ? $_POST['name'] : 'Guest';
+    $userDob   = isset($_POST['dob']) ? $_POST['dob'] : 'Not provided';
+    $userAbout = isset($_POST['about']) ? $_POST['about'] : 'Not specified';
 
-    // 2. Open the mail and print it on the screen
-    echo "<p>Welcome, " . $userName . "!</p>";
-    echo "<p>Your Date of Birth is: " . $userDob . "</p>";
-    echo "<p>You want to know about: " . $userAbout . "</p>";
+    // 2. Output the results safely
+    echo "<p>Welcome, " . htmlspecialchars($userName) . "!</p>";
+    echo "<p>Your Date of Birth is: " . htmlspecialchars($userDob) . "</p>";
+    echo "<p>You want to know about: " . htmlspecialchars($userAbout) . "</p>";
     ?>
 
 </body>
