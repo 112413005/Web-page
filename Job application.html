@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Form</title>
+</head>
+<body>
+
+<h2>Job Application Form</h2>
+
+<form method="post">
+
+    Name:
+    <input type="text" name="name" required><br><br>
+
+    Email:
+    <input type="email" name="email" required><br><br>
+
+    Phone:
+    <input type="tel" name="phone" required><br><br>
+
+    Position:
+    <input list="positions" name="position">
+    <datalist id="positions">
+        <option value="Web Developer">
+        <option value="Data Analyst">
+        <option value="Software Tester">
+        <option value="UI Designer">
+    </datalist>
+    <br><br>
+
+    Gender:
+    <input type="radio" name="gender" value="Male">Male
+    <input type="radio" name="gender" value="Female">Female
+    <br><br>
+
+    Skills:
+    <input type="checkbox" name="skills[]" value="HTML">HTML
+    <input type="checkbox" name="skills[]" value="PHP">PHP
+    <input type="checkbox" name="skills[]" value="JavaScript">JavaScript
+    <br><br>
+
+    Experience:
+    <select name="experience">
+        <option>Fresher</option>
+        <option>1-2 Years</option>
+        <option>3-5 Years</option>
+    </select>
+    <br><br>
+
+    <input type="submit" name="submit" value="Apply">
+
+</form>
+
+<?php
+if(isset($_POST['submit']))
+{
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $position = $_POST['position'];
+    $gender = $_POST['gender'];
+    $experience = $_POST['experience'];
+
+    $skills = "";
+    if(isset($_POST['skills']))
+    {
+        $skills = implode(", ", $_POST['skills']);
+    }
+
+    echo "<h3>Application Submitted Successfully</h3>";
+    echo "Name: $name <br>";
+    echo "Email: $email <br>";
+    echo "Phone: $phone <br>";
+    echo "Position: $position <br>";
+    echo "Gender: $gender <br>";
+    echo "Skills: $skills <br>";
+    echo "Experience: $experience <br>";
+}
+?>
+
+</body>
+</html>
